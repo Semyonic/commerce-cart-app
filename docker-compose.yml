@@ -1,0 +1,10 @@
+# equivalent docker command:
+# docker run --rm -d -p 9999:9999 localhost:5000/commerce-app:0.0.0
+
+version: '3.7'
+
+services:
+  angular:
+    image: localhost:4200/commerce-app:0.0.0
+    ports:
+      - "9999:9999"
