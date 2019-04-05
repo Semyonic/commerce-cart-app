@@ -4,7 +4,8 @@ import { Product } from '../shared/types/Product';
 import { ProductService } from '../services/product/product.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AddToCart } from './store/actions';
+import {AddToCart, RemoveFromCart} from './store/actions';
+import {pluck} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -33,8 +34,8 @@ import { AddToCart } from './store/actions';
 export class HomeComponent implements OnInit {
 
   state: Product[];
-  myMenu$: Observable<Menu[]> = this.service.getMenu();
-  products$: Observable<Product[]> = this.service.getAllProducts();
+  myMenu$: Observable<Menu[]> = this.service.getMenu().pipe(pluck('body'));
+  products$: Observable<Product[]> = this.service.getAllProducts().pipe(pluck('body'));
 
   constructor(private store: Store<{ rootReducer: { cartState } }>, private service: ProductService) {
   }
@@ -50,6 +51,6 @@ export class HomeComponent implements OnInit {
   }
 
   removeFromCart(product: Product): void {
-    this.store.dispatch(new AddToCart(product));
+    this.store.dispatch(new RemoveFromCart(product));
   }
 }

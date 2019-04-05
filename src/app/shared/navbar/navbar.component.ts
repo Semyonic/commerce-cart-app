@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit} from '@angular/core';
 import { Menu } from '../types/Menu';
+import {Observable} from "rxjs";
+import {pluck} from "rxjs/operators";
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,7 @@ import { Menu } from '../types/Menu';
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <ng-container *ngFor="let item of menu;">
+          <ng-container *ngFor="let item of menu">
             <li class="nav-item active">
               <a class="nav-link" [routerLink]="item.href" [innerText]="item.text"><span class="sr-only">(current)</span></a>
             </li>

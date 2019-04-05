@@ -61,7 +61,6 @@ export class CartComponent implements OnInit {
   }
 
   update(item: Product) {
-    console.warn({ ...item, quantity: this.qty });
     this.store.dispatch(new AddToCart({ ...item, quantity: this.qty }));
   }
 
