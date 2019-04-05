@@ -2,39 +2,51 @@ import { CartActionTypes, Actions } from './actions';
 import { Product } from '../../shared/types/Product';
 
 export interface CartState {
-  quantity: number;
-  total: number;
-  product: Product;
+  product: Product[];
 }
 
 export let initialState: CartState = {
-  quantity: null,
-  total: null,
-  product: null
+  product: [],
 };
 
-export function cartReducer(state = initialState, { payload, type }: Actions) {
-  switch (type) {
+export function cartReducer(state = initialState, action: Actions) {
+  switch (action.type) {
     case CartActionTypes.ADD:
-      state = initialState;
-      return addToCart(state, payload);
+      return pushToCart(state, action.payload);
     case CartActionTypes.REMOVE:
-      state = initialState;
-      return removeFromCart(state, payload);
+      return pullFromCart(state, action.payload);
+    case CartActionTypes.UPDATE:
+      return updateItems(state, action.payload);
+    case CartActionTypes.RESET:
+      return initialState;
     default:
       return state;
   }
 }
 
-function addToCart(cart: CartState, payload: Product) {
-  cart.quantity += 1;
-  cart.total += Number(payload.price);
-  cart.product = payload;
+function pushToCart(cart: CartState, payload: Product): CartState {
+  cart.product.map(x => x.id === payload.id && x.quantity > 0 ? x.quantity++ : x);
+  updateItems(cart, payload);
   return cart;
 }
 
-function removeFromCart(cart, payload) {
-  cart.quantity -= 1;
-  cart.total = payload.price;
+function pullFromCart(cart: CartState, payload: Product): CartState {
+  cart.product.map(x => x.id === payload.id ? x.quantity-- : x);
+  cart.product.filter(x => (x.id === payload.id) || x.quantity === 0 ? x : x);
+  updateItems(cart, payload);
   return cart;
+}
+
+function updateItems(cart: CartState, payload: Product) {
+  const targetItem: Product = cart.product.find(item => item.id === payload.id);
+  if (targetItem) {
+    if (payload.quantity <= 0) {
+      const index = cart.product.indexOf(targetItem);
+      cart.product.splice(index, 1);
+    } else {
+      targetItem.quantity = payload.quantity;
+    }
+  } else {
+    cart.product.push(payload);
+  }
 }

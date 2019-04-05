@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API: 'https://us-central1-mock-json-backend.cloudfunctions.net/',
 };

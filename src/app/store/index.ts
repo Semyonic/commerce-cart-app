@@ -5,7 +5,7 @@ export interface AppState {
   cartState: CartState;
 }
 
-export const appReducers: ActionReducer<AppState, Action> = combineReducers({
+export const appReducers: ActionReducer<any> = combineReducers({
   cartState: cartReducer
 });
 
