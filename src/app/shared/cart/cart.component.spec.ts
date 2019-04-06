@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartComponent } from './cart.component';
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -16,15 +16,9 @@ describe('CartComponent', () => {
           ...rootReducer,
           feature: combineReducers(rootReducer),
         }),
-        // other imports
       ],
-      declarations: [
-        CartComponent,
-        // other declarations
-      ],
-      providers: [
-        // other providers
-      ],
+      declarations: [CartComponent],
+      providers: [],
     });
 
     store = TestBed.get(Store);

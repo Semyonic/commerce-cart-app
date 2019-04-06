@@ -19,11 +19,13 @@ describe('ProductComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (done) => {
     expect(component).toBeTruthy();
+    done();
   });
 
-  it('should be set', () => {
+  it('should be set', (done) => {
     expect(component.price).toBeFalsy();
+    done();
   });
 });

@@ -33,12 +33,10 @@ module.exports = function (config) {
     autoWatch: true,
     customLaunchers: {
       ChromeHeadless: {
-        browserDisconnectTimeout: 10000,
-        browserDisconnectTolerance: 3,
-        browserNoActivityTimeout: 60000,
         base: 'Chrome',
         flags: [
           '--no-sandbox',
+          '--disable-setuid-sandbox',
           '--headless',
           '--disable-gpu',
           '--remote-debugging-port=9222'

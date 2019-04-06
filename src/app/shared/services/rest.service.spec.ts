@@ -4,14 +4,15 @@ import { RestService } from './rest.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './config.service';
 
-describe('RestService', () => {
+describe('RestService', async () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientModule],
     providers: [RestService, HttpClient, ConfigService]
   }));
 
-  it('should be created', () => {
+  it('should be created', (done) => {
     const service: RestService = TestBed.get(RestService);
+    done();
     expect(service).toBeTruthy();
   });
 });

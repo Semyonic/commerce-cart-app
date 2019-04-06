@@ -5,15 +5,15 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CartState } from '../../home/store/reducers';
-import { AddToCart } from '../../home/store/actions';
+import { CartState } from './store/reducers';
+import { RemoveFromCart, UpdateToCart } from './store/actions';
 import { Product } from '../types/Product';
 
 @Component({
   selector: 'app-cart',
   template: `
     <div>
-      <table class="table table-primary">
+      <table class="table table-secondary">
         <thead>
         <tr>
           <th>Product</th>
@@ -30,6 +30,7 @@ import { Product } from '../types/Product';
                      (blur)="update(item)"
                      [valueAsNumber]="item.quantity"></td>
           <td [innerText]="item.quantity * item.price"></td>
+          <td (click)="removeFromCart(item)">X</td>
         </tr>
         </tbody>
       </table>
@@ -43,7 +44,7 @@ export class CartComponent implements OnInit {
   @Input() items: Product[];
   state: CartState;
 
-  constructor(private store: Store<{ rootReducer: { cartState } }>) {
+  constructor(private store: Store<{ appState: { cartState } }>) {
   }
 
   private _qty: number;
@@ -57,11 +58,16 @@ export class CartComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.store.select(state => state.rootReducer.cartState).subscribe((state => this.state = state));
+
+    this.store.select(state => state.appState.cartState).subscribe((state => this.state = state));
   }
 
   update(item: Product) {
-    this.store.dispatch(new AddToCart({ ...item, quantity: this.qty }));
+    this.store.dispatch(new UpdateToCart({ ...item, quantity: this.qty }));
+  }
+
+  removeFromCart(item: Product) {
+    this.store.dispatch(new RemoveFromCart(item));
   }
 
   onKey(event) {

@@ -9,5 +9,5 @@ branches:
 before_script:
   - npm install -g @angular/cli
 script:
-  - ng test
+  - ng test-headless
   - ng build --dev --base-href https://semyonic.github.io/commerce-cart-app/

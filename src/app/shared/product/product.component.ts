@@ -17,8 +17,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, E
           content.</p>
       </div>
       <div class="card-body">
-        <p class="btn btn-outline-primary" (click)="onClick($event)">Add To Cart</p>
-        <p class="btn btn-outline-primary" (click)="onClick2($event)">Remove From Cart</p>
+        <button class="btn btn-outline-primary" (click)="onClick($event)">Add To Cart</button>
       </div>
       <div class="card-footer text-muted">
         <p>{{price}}₺</p>
@@ -53,9 +52,5 @@ export class ProductComponent {
 
   onClick(event: MouseEvent) {
     this.addToCart.emit(event);
-  }
-
-  onClick2(event: MouseEvent) {
-    this.removeCart.emit(event);
   }
 }

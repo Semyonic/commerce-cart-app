@@ -16,6 +16,7 @@ import { ConfigService } from './shared/services/config.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ProductResolver } from './shared/resolvers/product.resolver';
 
 @NgModule({
   declarations: [
@@ -30,18 +31,18 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(
-      { rootReducer }
+      { appState: rootReducer }
     ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     FormsModule,
   ],
-  providers: [RestService, ConfigService, ProductService],
+  providers: [RestService, ConfigService, ProductService, ProductResolver],
   exports: [
     AppComponent,
     ProductComponent,
     CartComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   bootstrap: [AppComponent]
 })

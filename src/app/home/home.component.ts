@@ -1,25 +1,24 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Menu } from '../shared/types/Menu';
 import { Product } from '../shared/types/Product';
-import { ProductService } from '../services/product/product.service';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {AddToCart, RemoveFromCart} from './store/actions';
-import {pluck} from 'rxjs/operators';
+import { AddToCart } from '../shared/cart/store/actions';
+import { take } from 'rxjs/operators';
+import { CartState } from '../shared/cart/store/reducers';
+import { ProductState } from './store/reducers';
+import { MenuState } from '../shared/navbar/store/reducers';
 
 @Component({
   selector: 'app-home',
   template: `
-    <app-navbar [menu]="myMenu$ | async">
-      <app-cart [items]="state"></app-cart>
+    <app-navbar [menu]="menuState?.menuItems">
+      <app-cart [items]="cartState.product"></app-cart>
     </app-navbar>
     <br>
     <div class="row">
-      <ng-container *ngFor="let product of products$ | async">
+      <ng-container *ngFor="let product of productState?.products">
         <div class="col-lg-4">
           <app-product
             (addToCart)="addToCart(product)"
-            (removeCart)="removeFromCart(product)"
             [price]="product.price"
             [productHeader]="product.name"
             [productImg]="product.image">
@@ -33,24 +32,23 @@ import {pluck} from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  state: Product[];
-  myMenu$: Observable<Menu[]> = this.service.getMenu().pipe(pluck('body'));
-  products$: Observable<Product[]> = this.service.getAllProducts().pipe(pluck('body'));
+  productState: ProductState;
+  cartState: CartState;
+  menuState: MenuState;
 
-  constructor(private store: Store<{ rootReducer: { cartState } }>, private service: ProductService) {
+  constructor(private store: Store<{ appState }>) {
   }
 
   public ngOnInit(): void {
-    this.store.select(state => state.rootReducer.cartState).subscribe((prod) => {
-      this.state = prod;
-    });
+    this.store.select((state) => state.appState).pipe(take(1))
+      .subscribe(({ productState, cartState, menuState }) => {
+        this.productState = productState;
+        this.cartState = cartState;
+        this.menuState = menuState;
+      });
   }
 
   addToCart(product: Product): void {
     this.store.dispatch(new AddToCart(product));
-  }
-
-  removeFromCart(product: Product): void {
-    this.store.dispatch(new RemoveFromCart(product));
   }
 }

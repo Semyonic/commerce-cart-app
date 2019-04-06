@@ -4,8 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:local": "ng build",
+    "build:dev": "ng build --configuration=dev",
+    "build:test": "ng build --configuration=test",
+    "build:prod": "ng build --configuration=production",
     "test": "ng test",
+    "test-headless": "ng test --karmaConfig=karma.conf.js --progress=false --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -43,10 +47,11 @@
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
     "karma-chrome-launcher": "~2.2.0",
+    "karma-puppeteer-launcher": "^1.0.4",
+    "puppeteer": "^1.14.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"

@@ -4,8 +4,10 @@ import { ProductService } from './product.service';
 import {HttpClient, HttpClientModule, HttpResponse} from '@angular/common/http';
 import {ConfigService} from '../../shared/services/config.service';
 import {Product} from '../../shared/types/Product';
+import { pluck } from 'rxjs/operators';
 
-describe('ProductService', () => {
+
+describe('ProductService', async () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientModule],
@@ -17,17 +19,18 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be reachable', () => {
+  it('should be reachable', (done) => {
     const service: ProductService = TestBed.get(ProductService);
     service.getAllProducts().subscribe((response: HttpResponse<Product[]>) => {
+      done();
       expect(response.status).toBe(200);
     });
   });
 
   it('should get all products', () => {
     const service: ProductService = TestBed.get(ProductService);
-    service.getAllProducts().subscribe((response: HttpResponse<Product[]>) => {
-      expect(response.body).toBeGreaterThan(0);
+    service.getAllProducts().pipe(pluck('body')).subscribe((response: HttpResponse<Product[]>) => {
+      expect(response).toBeGreaterThan(0);
     });
   });
 });

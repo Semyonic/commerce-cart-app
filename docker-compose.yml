@@ -1,10 +1,32 @@
-# equivalent docker command:
-# docker run --rm -d -p 9999:9999 localhost:5000/commerce-app:0.0.0
-
 version: '3.7'
 
 services:
-  angular:
-    image: localhost:4200/commerce-app:0.0.0
+  dev.web:
+    container_name: commerce-app-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        env: dev
     ports:
-      - "9999:9999"
+      - "80:9999"
+  test.web:
+    container_name: commerce-app-test
+    image: localhost:4200/commerce-app:0.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        env: test
+    ports:
+      - "80:9999"
+  prod.web:
+    container_name: commerce-app-prod
+    image: localhost:4200/commerce-app:0.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        env: prod
+    ports:
+      - "80:9999"
