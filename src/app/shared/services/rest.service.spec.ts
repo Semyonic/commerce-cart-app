@@ -12,7 +12,7 @@ describe('RestService', async () => {
 
   it('should be created', (done) => {
     const service: RestService = TestBed.get(RestService);
-    done();
     expect(service).toBeTruthy();
+    done();
   });
 });

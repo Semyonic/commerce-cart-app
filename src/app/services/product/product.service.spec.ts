@@ -7,7 +7,7 @@ import {Product} from '../../shared/types/Product';
 import { pluck } from 'rxjs/operators';
 
 
-describe('ProductService', async () => {
+describe('ProductService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientModule],
@@ -22,15 +22,16 @@ describe('ProductService', async () => {
   it('should be reachable', (done) => {
     const service: ProductService = TestBed.get(ProductService);
     service.getAllProducts().subscribe((response: HttpResponse<Product[]>) => {
-      done();
       expect(response.status).toBe(200);
+      done();
     });
   });
 
-  it('should get all products', () => {
+  it('should get all products', (done) => {
     const service: ProductService = TestBed.get(ProductService);
-    service.getAllProducts().pipe(pluck('body')).subscribe((response: HttpResponse<Product[]>) => {
-      expect(response).toBeGreaterThan(0);
+    service.getAllProducts().pipe(pluck('body')).subscribe((response: Product[]) => {
+      expect(response.length).toBeGreaterThan(0);
+      done();
     });
   });
 });

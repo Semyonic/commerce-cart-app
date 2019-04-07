@@ -33,8 +33,9 @@ describe('CartComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should be created', () => {
+    it('should be created', (done) => {
       expect(component).toBeTruthy();
+      done();
     });
   });
 });

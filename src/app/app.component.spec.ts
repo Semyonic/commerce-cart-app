@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { combineReducers, StoreModule } from '@ngrx/store';
 import { rootReducer } from './store';
 
-describe('AppComponent', async () => {
+describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -23,7 +23,7 @@ describe('AppComponent', async () => {
   it('should create the app', (done) => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    done();
     expect(app).toBeTruthy();
+    done();
   });
 });

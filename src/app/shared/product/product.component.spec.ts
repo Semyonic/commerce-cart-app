@@ -23,9 +23,4 @@ describe('ProductComponent', () => {
     expect(component).toBeTruthy();
     done();
   });
-
-  it('should be set', (done) => {
-    expect(component.price).toBeFalsy();
-    done();
-  });
 });
