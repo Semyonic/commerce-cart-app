@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { forkJoin, Observable } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
+import { pluck, tap } from 'rxjs/operators';
 import { ProductService } from '../../services/product/product.service';
 import { GetProducts } from '../../home/store/actions';
 import { ProductState } from '../../home/store/reducers';
@@ -18,7 +18,7 @@ export class ProductResolver implements Resolve<ProductState> {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.getData().pipe(map((response: Observable<Product[]> | Observable<Menu[]>) => {
+    return this.getData().pipe(tap((response: Observable<Product[]> | Observable<Menu[]>) => {
       this.store.dispatch(new GetProducts(response[0]));
       this.store.dispatch(new GetMenu(response[1]));
     }));
