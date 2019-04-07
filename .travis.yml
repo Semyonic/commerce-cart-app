@@ -7,9 +7,19 @@ dist: trusty
 addons:
   chrome: stable
 sudo: required
-cache: yarn
+cache:
+  yarn: true
+  directories:
+    - node_modules
 before_script:
   - yarn global add @angular/cli
 script:
   - yarn test-headless
   - ng build --base-href https://semyonic.github.io/commerce-cart-app/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/commerce-cart-app
+  on:
+    branch: master
