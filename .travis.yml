@@ -11,5 +11,5 @@ cache: yarn
 before_script:
   - yarn global add @angular/cli
 script:
-  - ng test-headless
+  - yarn test-headless
   - ng build --base-href https://semyonic.github.io/commerce-cart-app/

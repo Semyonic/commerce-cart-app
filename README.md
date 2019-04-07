@@ -19,7 +19,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io) + [Puppeteer](https://pptr.dev/).
 ##### Available Commands
-- `ng test-headless` to test in a Docker & CI environments
+- `yarn test-headless` to test in a Docker & CI environments
 
 # Docker Environments
 
