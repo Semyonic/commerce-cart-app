@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { RestService } from '../../shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { Product } from '../../shared/types/Product';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http: RestService) {
+  private header: {} = { 'Content-Type': 'application/json' };
+
+  constructor(private http: HttpClient) {}
+
+  getMenu(): Observable<any> {
+    return this.http.get(`${environment.API}/menu`, {
+      headers: this.header,
+      observe: 'response'
+    });
   }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get(`/products`);
+  getAllProducts(): Observable<any> {
+    return this.http.get(`${environment.API}/products`, {
+      headers: this.header,
+      observe: 'response'
+    });
   }
 }
