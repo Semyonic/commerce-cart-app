@@ -9,7 +9,7 @@ addons:
 sudo: required
 cache: yarn
 before_script:
-  - yarn install -g @angular/cli
+  - yarn global add @angular/cli
 script:
   - ng test-headless
   - ng build --base-href https://semyonic.github.io/commerce-cart-app/

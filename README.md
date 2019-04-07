@@ -22,7 +22,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - `ng test-headless` to test in a Docker & CI environments
 
 # Docker Environments
-## Self
 
 To provide deployment stage provide environment as :
 `--build-arg env=dev`
@@ -30,4 +29,10 @@ To provide deployment stage provide environment as :
 - `dev`
 - `test`
 - `prod`
-#
+
+### Building From Dockerfile
+`docker build  --build-arg env=dev  -t semyonic/commerce-cart-app .`
+## Running Image With Environments
+- `docker-compose up dev.web`
+- `docker-compose up test.web`
+- `docker-compose up prod.web`
