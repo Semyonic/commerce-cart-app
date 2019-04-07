@@ -13,5 +13,11 @@
       "app",
       "kebab-case"
     ]
+  },
+  "defaultSeverity": "warning",
+  "jsRules": {
+    "quotemark": {
+      "options": "single"
+    }
   }
 }

@@ -1,4 +1,4 @@
-export interface IMenu {
+export interface Menu {
   href: string;
   text: string;
 }

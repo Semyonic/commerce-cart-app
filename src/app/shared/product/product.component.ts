@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +17,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
           content.</p>
       </div>
       <div class="card-body">
-        <p class="btn btn-outline-primary">Add To Cart</p>
+        <button class="btn btn-outline-primary" (click)="onClick($event)">Add To Cart</button>
       </div>
       <div class="card-footer text-muted">
         <p>{{price}}₺</p>
@@ -28,6 +28,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
       text-align: center;
       font-weight: bold;
     }
+
     .btn {
       margin-left: 35%;
     }`
@@ -45,4 +46,11 @@ export class ProductComponent {
   @Input() productImgAlt: string;
   @Input() productDescription: string;
   @Input() price: number;
+
+  @Output() addToCart = new EventEmitter<MouseEvent>();
+  @Output() removeCart = new EventEmitter<MouseEvent>();
+
+  onClick(event: MouseEvent) {
+    this.addToCart.emit(event);
+  }
 }
