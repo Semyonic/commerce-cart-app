@@ -8,7 +8,7 @@ export enum MenuActionTypes {
 export class GetMenu implements Action {
   readonly type = MenuActionTypes.GET;
 
-  constructor(public payload: Menu) {
+  constructor(public payload: Menu[]) {
   }
 }
 

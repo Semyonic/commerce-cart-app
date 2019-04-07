@@ -21,16 +21,14 @@ import { Product } from '../types/Product';
           <th>Total Price</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let item of state.product">
+        <tbody id="cartItems">
+        <tr [id]="i" *ngFor="let item of state.product; let i=index;">
           <td [innerText]="item.name"></td>
-          <td><input type="number"
-                     (keyup)="onKey($event)"
-                     (change)="onKey($event)"
-                     (blur)="update(item)"
-                     [valueAsNumber]="item.quantity"></td>
+          <td>
+            <input type="number" (keyup)="onKey($event)" (change)="onKey($event)" (blur)="update(item)" [valueAsNumber]="item.quantity">
+          </td>
           <td [innerText]="item.quantity * item.price"></td>
-          <td (click)="removeFromCart(item)">X</td>
+          <td id="remove-product-{{i}}" (click)="removeFromCart(item)">X</td>
         </tr>
         </tbody>
       </table>

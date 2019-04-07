@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ProductService } from './product.service';
 import {HttpClient, HttpClientModule, HttpResponse} from '@angular/common/http';
-import {ConfigService} from '../../shared/services/config.service';
+import {ConfigService} from '../../shared/services/config/config.service';
 import {Product} from '../../shared/types/Product';
 import { pluck } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ describe('ProductService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientModule],
-    providers: [HttpClient, ConfigService]
+    providers: [HttpClient]
   }));
 
   it('should be created', () => {

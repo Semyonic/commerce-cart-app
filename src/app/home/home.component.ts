@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Product } from '../shared/types/Product';
 import { Store } from '@ngrx/store';
 import { AddToCart } from '../shared/cart/store/actions';
@@ -10,14 +10,15 @@ import { MenuState } from '../shared/navbar/store/reducers';
 @Component({
   selector: 'app-home',
   template: `
-    <app-navbar [menu]="menuState?.menuItems">
-      <app-cart [items]="cartState.product"></app-cart>
+    <app-navbar id="navbar" [menu]="menuState?.menuItems">
+      <app-cart id="cart" [items]="cartState.product"></app-cart>
     </app-navbar>
     <br>
-    <div class="row">
-      <ng-container *ngFor="let product of productState?.products">
-        <div class="col-lg-4">
+    <div class="row" id="products">
+      <ng-container *ngFor="let product of productState?.products; let i=index;">
+        <div id="product-card-{{product.id}}" class="col-lg-4">
           <app-product
+            [id]="i"
             (addToCart)="addToCart(product)"
             [price]="product.price"
             [productHeader]="product.name"
@@ -28,7 +29,6 @@ import { MenuState } from '../shared/navbar/store/reducers';
     </div>`,
   styles: [],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
 
@@ -36,7 +36,9 @@ export class HomeComponent implements OnInit {
   cartState: CartState;
   menuState: MenuState;
 
-  constructor(private store: Store<{ appState }>) {
+  constructor(
+    private cd: ChangeDetectorRef,
+    private store: Store<{ appState }>) {
   }
 
   public ngOnInit(): void {

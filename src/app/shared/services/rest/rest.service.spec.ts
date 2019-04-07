@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { RestService } from './rest.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ConfigService } from './config.service';
+import { ConfigService } from '../config/config.service';
 
 describe('RestService', async () => {
   beforeEach(() => TestBed.configureTestingModule({

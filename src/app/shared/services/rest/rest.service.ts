@@ -1,8 +1,8 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Environment } from '../types/Settings';
-import { ConfigService } from './config.service';
+import { Environment } from '../../types/Settings';
+import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class RestService {
