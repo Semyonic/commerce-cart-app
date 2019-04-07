@@ -3,29 +3,27 @@ version: '3.7'
 services:
   dev.web:
     container_name: commerce-app-dev
+    image: semyonic/commerce-app:latest
     build:
       context: .
-      dockerfile: Dockerfile
       args:
         env: dev
     ports:
       - "80:9999"
   test.web:
     container_name: commerce-app-test
-    image: localhost:4200/commerce-app:0.0.0
+    image: semyonic/commerce-app:latest
     build:
       context: .
-      dockerfile: Dockerfile
       args:
         env: test
     ports:
       - "80:9999"
   prod.web:
     container_name: commerce-app-prod
-    image: localhost:4200/commerce-app:0.0.0
+    image: semyonic/commerce-app:latest
     build:
       context: .
-      dockerfile: Dockerfile
       args:
         env: prod
     ports:

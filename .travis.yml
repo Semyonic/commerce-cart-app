@@ -1,13 +1,15 @@
 language: node_js
 node_js:
+  - "9"
+  - "10"
   - "11"
 dist: trusty
+addons:
+  chrome: stable
 sudo: required
-branches:
-  only:
-    - dev
+cache: yarn
 before_script:
-  - npm install -g @angular/cli
+  - yarn install -g @angular/cli
 script:
   - ng test-headless
-  - ng build --dev --base-href https://semyonic.github.io/commerce-cart-app/
+  - ng build --base-href https://semyonic.github.io/commerce-cart-app/

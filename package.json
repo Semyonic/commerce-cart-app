@@ -1,6 +1,10 @@
 {
   "name": "commerce-app",
-  "version": "0.0.0",
+  "version": "1.0.3",
+  "author": {
+    "name": "Semih Onay",
+    "email": "semihonay@hotmail.com.tr"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
