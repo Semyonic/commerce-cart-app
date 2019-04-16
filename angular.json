@@ -29,6 +29,30 @@
             "es5BrowserSupport": true
           },
           "configurations": {
+            "locale": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
             "dev": {
               "fileReplacements": [
                 {
@@ -109,6 +133,9 @@
             "browserTarget": "commerce-app:build"
           },
           "configurations": {
+            "locale": {
+              "browserTarget": "commerce-app:build:locale"
+            },
             "production": {
               "browserTarget": "commerce-app:build:production"
             }

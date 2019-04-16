@@ -33,6 +33,6 @@ To provide deployment stage provide environment as :
 ### Building From Dockerfile
 `docker build  --build-arg env=dev  -t semyonic/commerce-cart-app .`
 ## Running Image With Environments
-- `docker-compose up dev.web`
-- `docker-compose up test.web`
-- `docker-compose up prod.web`
+- `docker-compose up -d --build dev.web`
+- `docker-compose up -d --build test.web`
+- `docker-compose up -d --build prod.web`

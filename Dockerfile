@@ -1,7 +1,7 @@
 # Stage 1 (Prepare base)
 FROM avatsaev/angular-chrome-headless as Base
 LABEL maintainer="semihonay@hotmail.com.tr"
-ARG env=$env
+ARG env=prod
 ENV env=$env
 
 WORKDIR /commerce-app

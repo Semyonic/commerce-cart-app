@@ -1,11 +1,11 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Product } from '../shared/types/Product';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AddToCart } from '../shared/cart/store/actions';
 import { take } from 'rxjs/operators';
+import { AddToCart } from '../shared/cart/store/actions';
 import { CartState } from '../shared/cart/store/reducers';
-import { ProductState } from './store/reducers';
 import { MenuState } from '../shared/navbar/store/reducers';
+import { Product } from '../shared/types/Product';
+import { ProductState } from './store/reducers';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +29,7 @@ import { MenuState } from '../shared/navbar/store/reducers';
     </div>`,
   styles: [],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
 
@@ -36,9 +37,7 @@ export class HomeComponent implements OnInit {
   cartState: CartState;
   menuState: MenuState;
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    private store: Store<{ appState }>) {
+  constructor(private store: Store<{ appState }>) {
   }
 
   public ngOnInit(): void {

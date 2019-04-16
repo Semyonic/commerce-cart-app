@@ -1,7 +1,5 @@
-import {Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit} from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Menu } from '../types/Menu';
-import {Observable} from "rxjs";
-import {pluck} from "rxjs/operators";
 
 @Component({
   selector: 'app-navbar',
